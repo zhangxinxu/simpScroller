@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>simplScroll.js测试demo</title>
+<link rel="stylesheet" href="simpScroller.css" />
+<style>
+body {
+	width: 300px;
+	margin: 0 auto;
+}
+.vertical {
+	height: 200px;
+	overflow: hidden;
+}
+.horizontal {
+	width: 100%;
+	overflow: hidden;
+}
+.horizontal > p {
+	width: 600px;
+}
+.both {
+	width: 100%; height: 220px;
+	overflow: hidden;
+}
+.both > img {
+	vertical-align: bottom;
+}
+</style>
+</head>
+
+<body>
+<h2>垂直滚动</h2>
+<div class="vertical">
+	<p>刚到西宁，机场翻新，却找不到的士，又见很多拉客司机，称他们是市区出租车，正规车，回程也一百元，但机场交警不准他们带客人。我惊，那谁才可以拉客呢？他们说机场有五十几台的士，每年向机场交钱两万元，没有关系的还交不上，只有他们才能拉客。我说坐你的车走吧，我靠~他惊恐，别大声，抓了要罚款</p>
+    <p>我们像做贼一样偷偷摸上车，司机变得很开心，说他从两点等到六点，总算赚到一百元，没有被交警发现没有扣留驾驶证罚款两百。然后，他开始恨恨诉苦，机场那帮孙子，一天赚八百！给了交警还有好多钱！</p>
+</div>
+<h2>水平滚动</h2>
+<div class="horizontal">
+	<p>在地铁上，一个妈妈带着孩子坐地铁，车上挤满了人，孩子不停地一边说我的黄色小球呢，一边哭。最后车上所有的人都帮小孩子找球，找遍了全车，也没找到一个球。孩子忽然不哭，手指放到鼻孔里说："我再做一个"。[挖鼻屎]</p>
+</div>
+<h2>双向滚动</h2>
+<div class="both"><img src="http://image.zhangxinxu.com/image/study/s/s512/mm1.jpg"></div>
+<script src="simpScroller.js"></script>
+<script>
+if (window.addEventListener) {
+	simpScroller(document.querySelector(".vertical"));		
+	simpScroller(document.querySelector(".horizontal"), {
+		verticalScroll: false,
+		horizontalScroll: true,	
+	});	
+	simpScroller(document.querySelector(".both"), {
+		horizontalScroll: true	
+	});	
+}
+</script>
+</body>
+</html>
