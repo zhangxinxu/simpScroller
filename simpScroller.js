@@ -123,7 +123,7 @@ var simpScroller = (function() {
 		var wrap = document.createElement("div");
 		wrap.style.height = "100%";
 		wrap.style.width = "100%";
-		wrap.style.overflow = "auto";
+		wrap.style.overflow = "hidden";
 		
 		// 容器插入包裹元素
 		container.insertBefore(wrap, container.firstElementChild);
