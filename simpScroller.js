@@ -30,10 +30,10 @@ var simpScroller = (function() {
 		if (params.hideScrollBar == false) {
 			scroller = document.createElement("div");
 			scroller.className = "scroller_" + direction;
-			container.appendChild(scroller);
+			params.container.appendChild(scroller);
 		}
 		
-		// 容器高度以及包含滚动的高度
+		// 容器尺寸以及包含滚动的尺寸
 		var sizeContainer = container["client" + Size]
 			// 因为有滚动动态加载等情况出现，因此默认为0
 			, sizeContainerWithScroll = 0;
@@ -42,20 +42,14 @@ var simpScroller = (function() {
 		var fnPosScroll = function() {
 			if (scroller == null) return;
 			var sizeScroller = scroller.style[size].replace("px", "")
-				, keyScroller = sizeContainer * container["scroll" + Key] / sizeContainerWithScroll;
+				, keyScroller = container["scroll" + Key] / (sizeContainerWithScroll - sizeContainer) * (sizeContainer - sizeScroller);
 			
 			// 边界溢出的修正
 			if (sizeContainer - sizeScroller - keyScroller <= 0) {
 				keyScroller = sizeContainer - sizeScroller;
 			}
 			// 滚动条的定位
-			scroller.style["margin" + Key] = container["scroll" + Key] + "px";
 			scroller.style[key] = keyScroller + "px";
-			if (key == "top") {
-				scroller.style.right = -1 * container.scrollLeft + "px";
-			} else {
-				scroller.style.bottom = -1 * container.scrollTop + "px";
-			}
 		};
 		
 		// 事件
@@ -66,10 +60,9 @@ var simpScroller = (function() {
 			pos[key] = this["scroll" + Key];
 			document.moveFollow = true;
 			if (scroller && sizeContainerWithScroll > sizeContainer) {
-				scroller.style.visibility = "visible";
 				scroller.style.opacity = 1;
 				scroller.style[size] = (sizeContainer * sizeContainer / sizeContainerWithScroll) + "px";
-				scroller.style["margin" + Key] = this["scroll" + Key] + "px";
+				
 				fnPosScroll();	
 			}
 		});	
@@ -77,13 +70,16 @@ var simpScroller = (function() {
 			if (_upSupportTouch == false || (document.moveFollow == true)) {
 				// touch设备或有可移动标志
 				this["scroll" + Key] = pos[key] + (pos[pageKey] - (event[pageKey] || event.touches[0][pageKey]));
-			}
-			fnPosScroll();
+				// 自定义滚动条的位置
+				fnPosScroll();
+				// 回调
+				params.onScroll.call(this, event);
+			}	
+			// 阻止默认滚动
 			event.preventDefault();
 		});
 		container.addEventListener(_event.end, function(event) {
-			scroller.style.opacity = 0;
-			scroller.style.visibility = "hidden";
+			scroller && (scroller.style.opacity = 0);
 		});
 		
 		if (_upSupportTouch == true) {
@@ -107,16 +103,39 @@ var simpScroller = (function() {
 			params[key] = options[key];	
 		}
 		
-		// 如果容器position为static, 改成relative
 		if (window.getComputedStyle(container).position == "static") {
 			container.style.position = "relative";
 		}
+
+		
+		// 子元素们
+		var childerns = container.childNodes
+		// 文档片段
+			, fragment = document.createDocumentFragment();
+			
+		// 将子元素的集合放在文档片段中
+		// 方便实现wrap效果
+		[].slice.call(childerns).forEach(function(child) {
+			fragment.appendChild(child);	
+		});
+		
+		// wrap的父元素
+		var wrap = document.createElement("div");
+		wrap.style.height = "100%";
+		wrap.style.width = "100%";
+		wrap.style.overflow = "auto";
+		
+		// 容器插入包裹元素
+		container.insertBefore(wrap, container.firstElementChild);
+		// 加载子元素集合文档片段，完成wrap包裹效果
+		wrap.appendChild(fragment);
+		params.container = container;
 		
 		if (params.verticalScroll == true) {
-			_scroller(container, "vertical", params);	
+			_scroller(wrap, "vertical", params);	
 		}
 		if (params.horizontalScroll == true) {
-			_scroller(container, "horizontal",  params);	
+			_scroller(wrap, "horizontal",  params);	
 		}
 	};
 })();

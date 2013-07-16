@@ -17,15 +17,18 @@ body {
 	width: 100%;
 	overflow: hidden;
 }
-.horizontal > p {
+.horizontal p {
 	width: 600px;
 }
 .both {
 	width: 100%; height: 220px;
 	overflow: hidden;
 }
-.both > img {
+.both img {
 	vertical-align: bottom;
+}
+.noscrollbar {
+	height:100px;
 }
 </style>
 </head>
@@ -42,6 +45,14 @@ body {
 </div>
 <h2>双向滚动</h2>
 <div class="both"><img src="http://image.zhangxinxu.com/image/study/s/s512/mm1.jpg"></div>
+<h2>不显示滚动条</h2>
+<div class="noscrollbar">
+	Google提出了"井号+感叹号"的结构。<br /><br />
+    http://example.com#!1<br /><br />
+    当Google发现上面这样的URL，就自动抓取另一个网址：<br /><br />
+    http://example.com/?_escaped_fragment_=1<br /><br />
+    只要你把AJAX内容放在这个网址，Google就会收录。但是问题是，"井号+感叹号"非常难看且烦琐。
+</div>
 <script src="simpScroller.js"></script>
 <script>
 if (window.addEventListener) {
@@ -52,6 +63,12 @@ if (window.addEventListener) {
 	});	
 	simpScroller(document.querySelector(".both"), {
 		horizontalScroll: true	
+	});	
+	simpScroller(document.querySelector(".noscrollbar"), {
+		hideScrollBar: true	,
+		onScroll: function(event) {
+			console.log("type: " + event.type);
+		}
 	});	
 }
 </script>
