@@ -5,7 +5,7 @@ Oh, guy, I just want to add several simple pages for mobile, my small heart can'
 
 small enough?
 ---------------------
-About 4~5K, and small than 2K after compressing. Not small enough. If you still feel this js is large, ok, I true have  smaller one, just contact me with email that is zhangxinxu@zhangxinxu.com
+About 4~5K, and small than 2K after compressing. Not small enough? If you still feel this js is large, ok, I true have smaller one, just contact me with email zhangxinxu@zhangxinxu.com
 
 support
 -------------------------
