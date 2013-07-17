@@ -30,6 +30,9 @@ As follow:
 demo
 ----------------------
 You can click <a href="http://htmlpreview.github.io/?https://github.com/zhangxinxu/simpScroller/blob/master/index.html">here</a> to visit. 
+more
+---------------------
+You can click <a href="http://www.zhangxinxu.com/wordpress/?p=3505">here(chinese)</a> to get more information.
 License
 --------------------------
 What's this? ![疑问](http://mat1.gtimg.com/www/mb/images/face/32.gif "疑问表情")
