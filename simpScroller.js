@@ -56,7 +56,7 @@ var simpScroller = (function() {
 		var pos = {};
 		container.addEventListener(_event.start, function(event) {	
 			sizeContainerWithScroll = this["scroll" + Size];
-			pos[pageKey] = event[pageKey] || event.touches[0][pageKey];
+			pos[pageKey] = event.touches? event.touches[0][pageKey]: event[pageKey];
 			pos[key] = this["scroll" + Key];
 			document.moveFollow = true;
 			if (scroller && sizeContainerWithScroll > sizeContainer) {
@@ -69,7 +69,7 @@ var simpScroller = (function() {
 		container.addEventListener(_event.move, function(event) {		
 			if (_upSupportTouch == false || (document.moveFollow == true)) {
 				// touch设备或有可移动标志
-				this["scroll" + Key] = pos[key] + (pos[pageKey] - (event[pageKey] || event.touches[0][pageKey]));
+				this["scroll" + Key] = pos[key] + (pos[pageKey] - (event.touches? event.touches[0][pageKey]: event[pageKey]));
 				// 自定义滚动条的位置
 				fnPosScroll();
 				// 回调
@@ -126,7 +126,7 @@ var simpScroller = (function() {
 		wrap.style.overflow = "hidden";
 		
 		// 容器插入包裹元素
-		container.insertBefore(wrap, container.firstElementChild);
+		container.appendChild(wrap);
 		// 加载子元素集合文档片段，完成wrap包裹效果
 		wrap.appendChild(fragment);
 		params.container = container;

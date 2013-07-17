@@ -11,8 +11,12 @@ body {
 }
 .vertical {
 	height: 200px;
+	overflow: hidden;
 }
 
+.horizontal {
+	overflow: hidden;
+}
 .horizontal p {
 	width: 600px;
 }
@@ -25,6 +29,7 @@ body {
 }
 .noscrollbar {
 	height:100px;
+	overflow: hidden;
 }
 </style>
 </head>
@@ -40,8 +45,9 @@ body {
 	<p>在地铁上，一个妈妈带着孩子坐地铁，车上挤满了人，孩子不停地一边说我的黄色小球呢，一边哭。最后车上所有的人都帮小孩子找球，找遍了全车，也没找到一个球。孩子忽然不哭，手指放到鼻孔里说："我再做一个"。[挖鼻屎]</p>
 </div>
 <h2>双向滚动</h2>
-<div class="both"><img src="http://image.zhangxinxu.com/image/study/s/s512/mm1.jpg"></div>
+<div class="both"><img src="http://image.zhangxinxu.com/image/study/s/s512/mm1.jpg" width="512" height="381"></div>
 <h2>不显示滚动条</h2>
+<div id="result"></div>
 <div class="noscrollbar">
 	Google提出了"井号+感叹号"的结构。<br /><br />
     http://example.com#!1<br /><br />
@@ -61,9 +67,9 @@ if (window.addEventListener) {
 		horizontalScroll: true	
 	});	
 	simpScroller(document.querySelector(".noscrollbar"), {
-		hideScrollBar: true	,
+		hideScrollBar: true,
 		onScroll: function(event) {
-			console.log("type: " + event.type);
+			// console.log("type: " + event.type);
 		}
 	});	
 }
