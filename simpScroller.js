@@ -65,6 +65,7 @@ var simpScroller = (function() {
 				
 				fnPosScroll();	
 			}
+			_upSupportTouch && event.preventDefault();
 		});	
 		container.addEventListener(_event.move, function(event) {		
 			if (_upSupportTouch == false || (document.moveFollow == true)) {
