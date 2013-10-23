@@ -107,7 +107,6 @@ var simpScroller = (function() {
 		if (window.getComputedStyle(container).position == "static") {
 			container.style.position = "relative";
 		}
-
 		
 		// 子元素们
 		var childerns = container.childNodes
@@ -140,3 +139,4 @@ var simpScroller = (function() {
 		}
 	};
 })();
+
